@@ -17,6 +17,6 @@
   5.
   <img src="https://user-images.githubusercontent.com/98150971/206564348-665134ce-7433-4d9a-a05b-6fe4a2113e32.png">
   6. 
-  <img src="https://user-images.githubusercontent.com/98150971/206564382-45cfd002-f667-4879-ae98-8299407e2788.png">
+  <img src="https://user-images.githubusercontent.com/98150971/206569659-876a04e4-46e6-4c6c-ad7f-65c591f366aa.png">
 
 
