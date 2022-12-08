@@ -154,7 +154,7 @@ def task_six():
 
     ax1 = axs[0, 0]
     ax1.set_ylabel('Percentage(%)')
-    ax1.set_title('6th Trimester')
+    ax1.set_title('4th Trimester')
     ax1.grid()
     for i in range(3):
         ax1.bar(df['The type of Exam'].iloc[i], df['4 Trimester'].iloc[i], 0.3)
