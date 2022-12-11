@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import time
 
-"""
+
 def task_one():
     # Диаграмма с оценками студентов по предметам
     df = pd.DataFrame([
@@ -20,7 +20,6 @@ def task_one():
     plt.ylabel('Grades')
     plt.title('All grades of each student')
     plt.show()
-"""
 
 
 def task_two():
@@ -54,8 +53,8 @@ def task_two():
             temperatures[i][j] = temperature
             # Задержка, чтоб не приняло за спам
             time.sleep(0.3)
-        if(i < 2):
-            print(f'Plz wait I parsed only {i+1} cities')
+        if i < 2:
+            print(f'Plz wait I parsed only {i + 1} cities')
         else:
             print('I did it')
     df = pd.DataFrame([
@@ -75,7 +74,7 @@ def task_two():
     plt.grid()
     plt.show()
 
-"""
+
 def task_three():
     df = pd.DataFrame([
         ['Kazakh', 1, 1, 1, 2, 1],
@@ -215,16 +214,15 @@ def task_six():
     # Удаляю ненужную ось
     fig.delaxes(axs[1, 1])
     plt.show()
-"""
 
 
 def main():
-    # task_one()
+    task_one()
     task_two()
-    # task_three()
-    # task_four()
-    # task_five()
-    # task_six()
+    task_three()
+    task_four()
+    task_five()
+    task_six()
 
 
 if __name__ == "__main__":
