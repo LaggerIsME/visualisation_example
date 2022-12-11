@@ -1,8 +1,10 @@
 import matplotlib.pyplot as plt
-import numpy as np
+import requests
+from bs4 import BeautifulSoup
 import pandas as pd
+import time
 
-
+"""
 def task_one():
     # Диаграмма с оценками студентов по предметам
     df = pd.DataFrame([
@@ -18,28 +20,62 @@ def task_one():
     plt.ylabel('Grades')
     plt.title('All grades of each student')
     plt.show()
+"""
 
 
 def task_two():
     # График изменения погоды
+    # Определенный город
+    cities = ['Astana', 'Karaganda', 'Almaty']
+    days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+    n = len(days)
+    m = len(cities)
+    temperatures = []
+    # Двумерный массив m * n(3 на 7)
+    print('Wait, I am parsing')
+    for i in range(m):
+        temperatures.append([0] * n)
+
+    # Создание ссылки для поискового запроса
+    for i in range(len(cities)):
+        for j in range(len(days)):
+            url = f"https://www.google.com/search?q=weather+{cities[i]}+{days[j]}"
+            # Получаю сайт
+            html = requests.get(url).content
+            # Преобразую в понятный для Python формат
+            soup = BeautifulSoup(html, 'html.parser')
+            # Блок с нужной информацией преобразую в список
+            info = soup.find('div', attrs={'class': 'BNeawe tAd8D AP7Wnd'}).text.split()
+            # Из всего списка данных достаю лишь температуры
+            mod_info = [i for i in info if '°C' in i]
+            # Удаляю знак температуры и преобразую в числа
+            temperature = int([s.replace('°C', '') for s in mod_info][0])
+            # Заполняю массив данных о температуре
+            temperatures[i][j] = temperature
+            # Задержка, чтоб не приняло за спам
+            time.sleep(0.3)
+        if(i < 2):
+            print(f'Plz wait I parsed only {i+1} cities')
+        else:
+            print('I did it')
     df = pd.DataFrame([
-        ['Monday', 25, 20, 24],
-        ['Tuesday', 24, 25, 26],
-        ['Wednesday', 23, 30, 32],
-        ['Thursday', 30, 32, 34],
-        ['Friday', 27, 30, 28],
-        ['Saturday', 30, 24, 30],
-        ['Sunday', 26, 30, 32]
+        [days[0], temperatures[0][0], temperatures[1][0], temperatures[2][0]],
+        [days[1], temperatures[0][1], temperatures[1][1], temperatures[2][1]],
+        [days[2], temperatures[0][2], temperatures[1][2], temperatures[2][2]],
+        [days[3], temperatures[0][3], temperatures[1][3], temperatures[2][3]],
+        [days[4], temperatures[0][4], temperatures[1][4], temperatures[2][4]],
+        [days[5], temperatures[0][5], temperatures[1][5], temperatures[2][5]],
+        [days[6], temperatures[0][6], temperatures[1][6], temperatures[2][6]]
     ],
-        columns=['Days of Week', 'Astana', 'Karaganda',
-                 'Almaty'])
+        columns=['Days of Week', cities[0], cities[1],
+                 cities[2]])
     df.plot(x='Days of Week')
     plt.ylabel('Temperature(C)')
     plt.title('The changes of temperature in cities during a week')
     plt.grid()
     plt.show()
 
-
+"""
 def task_three():
     df = pd.DataFrame([
         ['Kazakh', 1, 1, 1, 2, 1],
@@ -179,15 +215,16 @@ def task_six():
     # Удаляю ненужную ось
     fig.delaxes(axs[1, 1])
     plt.show()
+"""
 
 
 def main():
-    task_one()
+    # task_one()
     task_two()
-    task_three()
-    task_four()
-    task_five()
-    task_six()
+    # task_three()
+    # task_four()
+    # task_five()
+    # task_six()
 
 
 if __name__ == "__main__":
